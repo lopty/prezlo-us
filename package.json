@@ -1,0 +1,12 @@
+{
+  "name": "prezlo-us",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && node preview.mjs --hosted",
+    "preview": "node preview.mjs",
+    "lint": "node --check build.mjs && node --check preview.mjs && node --check src/states.mjs && node --check src/editorial.mjs && node --check src/lead-plans.mjs && node --check src/state-industry.mjs && node --check src/state-map.mjs && node --check src/assets/site.js"
+  }
+}
