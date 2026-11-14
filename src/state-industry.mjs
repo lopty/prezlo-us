@@ -1,7 +1,7 @@
 import { census, usps, trust } from './states.mjs';
 
 const brand = 'https://prezlo.io';
-const audit = brand + '/audit';
+const demo = 'https://calendly.com/prezlosupport/30min';
 const trial = brand + '/auth?mode=register';
 const arrow = '<svg class="arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10h12m-5-5 5 5-5 5"/></svg>';
 const e = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -135,7 +135,7 @@ export function buildStateIndustryPage(state, industry, allStates, allIndustries
     : `AI Search & Lead Generation for ${industry.name} in ${state.name}`;
   const description = isTxFinance
     ? 'See how Texas financial advisory firms test AI search, publish verifiable service evidence, and turn referrals across Dallas, Austin, and Houston into qualified consultations.'
-    : `Help ${lower} in ${state.name} get recommended by ChatGPT, Gemini, and Perplexity across ${state.first}, ${state.second}, and ${state.third}. Verify ${industry.credentialSignals.split(',')[0]} and convert qualified leads with Prezlo.`;
+    : `See how ${lower} in ${state.name} can test local buyer questions, verify service fit, and qualify AI referrals in ${state.first} and ${state.second}.`;
 
   const cityPrompts = buildCityPrompts(state, industry);
   const faqs = buildFaqs(state, industry);
@@ -168,7 +168,7 @@ export function buildStateIndustryPage(state, industry, allStates, allIndustries
       ${sectionLabel(`${state.name} · ${industry.displayTag} · ${state.area} US`)}
       <h1>${h1Html}</h1>
       <p>Show up when ${industry.buyerRoles} ask AI assistants for ${industry.serviceList[0]} or ${industry.serviceList[1]} across ${state.first}, ${state.second}, and ${state.third}.</p>
-      <div class="buttons center-buttons">${btn('Get an AI audit', audit)}${btn('Start a trial', trial, 'outline')}</div>
+      <div class="buttons center-buttons">${btn('Book a demo', demo)}${btn('Start a trial', trial, 'outline')}</div>
     </div>
     <div class="detail-pair">
       <div class="market-panel">

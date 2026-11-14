@@ -8,12 +8,11 @@ import { buildStateIndustryPage } from './src/state-industry.mjs';
 
 const origin = process.env.PREZLO_SITE_ORIGIN || 'https://us.prezlo.io';
 const brand = 'https://prezlo.io';
-const audit = brand + '/audit';
+const demo = 'https://calendly.com/prezlosupport/30min';
 const trial = brand + '/auth?mode=register';
 const pricing = brand + '/pricing';
 const docsUrl = brand + '/docs';
 const output = 'dist';
-const buildDate = new Date().toISOString().slice(0, 10);
 const arrow = '<svg class="arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10h12m-5-5 5 5-5 5"/></svg>';
 const e = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const btn = (label, href, mode = '') => `<a class="button ${mode}" href="${e(href)}">${label}${arrow}</a>`;
@@ -40,7 +39,7 @@ function header(route) {
   return `<a class="skip" href="#main">Skip to content</a><header class="archio-topbar"><div class="archio-topbar-inner">
     ${logo}
     <div class="archio-topbar-right">
-      <a class="archio-live-pill" href="${e(audit)}"><span class="archio-pulser" aria-hidden="true"></span><span>AI audits live</span></a>
+      <a class="archio-live-pill" href="${e(demo)}"><span class="archio-pulser" aria-hidden="true"></span><span>Book a demo</span></a>
       <span class="archio-vdivider" aria-hidden="true"></span>
       <a class="archio-top-link" href="/regions/">50 States</a>
       <span class="archio-vdivider" aria-hidden="true"></span>
@@ -48,12 +47,12 @@ function header(route) {
       <span class="archio-vdivider" aria-hidden="true"></span>
       <a class="archio-top-link" href="${e(brand)}/auth">Log in</a>
     </div>
-    <details class="mobile-nav"><summary>Menu</summary><nav aria-label="Mobile navigation">${nav(route)}<a href="${e(brand)}/auth">Log in</a><a class="archio-btn-primary" href="${e(audit)}">Get AI Audit ${arrow}</a></nav></details>
+    <details class="mobile-nav"><summary>Menu</summary><nav aria-label="Mobile navigation">${nav(route)}<a href="${e(brand)}/auth">Log in</a><a class="archio-btn-primary" href="${e(demo)}">Book a Demo ${arrow}</a></nav></details>
     </div></header>
     <nav class="archio-float-nav" aria-label="Floating site navigation"><div class="archio-float-shell">
       <a class="archio-float-home" href="/" aria-label="Home">${homeIcon}</a>
       <div class="archio-float-links">${nav(route)}</div>
-      <a class="archio-btn-primary archio-btn-nav" href="${e(audit)}">Get AI Audit</a>
+      <a class="archio-btn-primary archio-btn-nav" href="${e(demo)}">Book a Demo</a>
     </div></nav>`;
 }
 
@@ -71,7 +70,7 @@ const footer = `<footer class="archio-footer"><div class="archio-footer-inner">
   <a class="archio-footer-mail" href="${e(brand)}">prezlo.io · United States</a>
   <div class="archio-footer-divider" aria-hidden="true"></div>
   <div class="archio-footer-statement">${logo}<p>Help your US business get understood, trusted, and recommended by ChatGPT, Gemini, Perplexity, and Claude.</p></div>
-  <nav class="archio-footer-nav" aria-label="Footer navigation">${footerButtons.map(([name, path]) => `<a class="archio-btn-clean" href="${e(path)}">${name}</a>`).join('')}<a class="archio-btn-primary" href="${e(audit)}">Get Started ${arrow}</a></nav>
+  <nav class="archio-footer-nav" aria-label="Footer navigation">${footerButtons.map(([name, path]) => `<a class="archio-btn-clean" href="${e(path)}">${name}</a>`).join('')}<a class="archio-btn-primary" href="${e(trial)}">Get Started ${arrow}</a></nav>
   <div class="archio-footer-legal"><span>© Prezlo United States</span><span>${states.length} US States · ${industries.length} Industries · ${states.length * industries.length} Local Playbooks</span></div>
   <div class="archio-footer-wordmark" aria-hidden="true">Prezlo</div>
 </div></footer>`;
@@ -211,7 +210,7 @@ function home() {
             <h1>Business growth via AI search</h1>
             <p class="archio-hero-sub">Get understood, verified, and recommended by ChatGPT, Gemini, and Perplexity across all 50 US states.</p>
             <div class="archio-hero-ctas">
-              <a class="archio-btn-primary" href="${e(audit)}">Get Started ${arrow}</a>
+              <a class="archio-btn-primary" href="${e(trial)}">Get Started ${arrow}</a>
               <a class="archio-btn-secondary" href="/regions/">50 States ${arrow}</a>
             </div>
             <div class="archio-hero-rule" aria-hidden="true"></div>
@@ -265,7 +264,7 @@ function home() {
             <a href="/regions/">50 US States</a>
           </div>
           <div class="archio-hero-ctas">
-            <a class="archio-btn-primary" href="${e(docsUrl)}">Explore Prezlo Docs ${arrow}</a>
+            <a class="archio-btn-primary" href="/guides/">Explore the guides ${arrow}</a>
             <a class="archio-btn-clean" href="/industries/">All 11 Industries</a>
           </div>
         </div>
@@ -312,7 +311,7 @@ function home() {
             <h2>A structured process for winning local AI search</h2>
             <p>Our step-by-step system replaces vague content checklists with verifiable prompt measurement, structured entity proof, and qualified intake.</p>
             <div class="archio-hero-ctas">
-              <a class="archio-btn-primary" href="${e(audit)}">Get AI Audit ${arrow}</a>
+              <a class="archio-btn-primary" href="${e(demo)}">Book a Demo ${arrow}</a>
               <a class="archio-btn-secondary" href="${e(trial)}">Start Free Trial</a>
             </div>
             <div class="archio-hero-trust">
@@ -583,7 +582,7 @@ function statePage(s) {
   const faqs = stateFaqs(s);
 
   return `<section class="detail-hero state-hero ${s.area.toLowerCase()}"><div class="wrap">
-    <div class="detail-intro">${sectionLabel(`${s.area} · United States · ${s.code}`)}<h1>AI search and lead generation in ${s.name}</h1><p>Help buyers across ${s.first}, ${s.second}, and ${s.third} verify fit and choose your ${s.name} business in ChatGPT, Gemini, and Perplexity.</p><div class="buttons center-buttons">${btn('Get an AI audit',audit)}${btn(`Browse ${s.name} industries`,'#state-industries','outline')}</div></div>
+    <div class="detail-intro">${sectionLabel(`${s.area} · United States · ${s.code}`)}<h1>AI search and lead generation in ${s.name}</h1><p>Help buyers across ${s.first}, ${s.second}, and ${s.third} verify fit and choose your ${s.name} business in ChatGPT, Gemini, and Perplexity.</p><div class="buttons center-buttons">${btn('Book a demo',demo)}${btn(`Browse ${s.name} industries`,'#state-industries','outline')}</div></div>
     <div class="detail-pair">
       <div class="market-panel">
         <p>${s.name} market context</p>
@@ -650,7 +649,7 @@ function industryPage(i) {
     ? `<div class="editorial-photo">${editorialPhoto(photo)}</div>`
     : `<div class="market-panel"><p>Example buyer decision</p><h2>${i.angle}</h2><p>${i.example}</p><dl class="brief-meta"><div><dt>Schema type</dt><dd class="mono-inline">${e(i.schemaType)}</dd></div><div><dt>Key buyers</dt><dd>${e(i.buyerRoles)}</dd></div><div><dt>Intake fields</dt><dd>${e(i.intakeFields)}</dd></div></dl></div>`;
   return `<section class="detail-hero industry-hero"><div class="wrap">
-    <div class="detail-intro">${sectionLabel(`Industry playbook · ${i.displayTag}`)}<h1>AI search and lead generation for ${i.name.toLowerCase()}</h1><p>${i.description} Explore the workflow and open localized playbooks for all 50 US states.</p><div class="buttons center-buttons">${btn('Get an AI audit',audit)}${btn('Browse all 50 states','#industry-states','outline')}</div></div>
+    <div class="detail-intro">${sectionLabel(`Industry playbook · ${i.displayTag}`)}<h1>AI search and lead generation for ${i.name.toLowerCase()}</h1><p>${i.description} Explore the workflow and open localized playbooks for all 50 US states.</p><div class="buttons center-buttons">${btn('Book a demo',demo)}${btn('Browse all 50 states','#industry-states','outline')}</div></div>
     <div class="detail-pair">${industryVisual}<div class="question-card">${sectionLabel('High-intent buyer question')}<blockquote>“${plan.prompt}”</blockquote><dl class="question-facts"><div><dt>Core services</dt><dd>${e(i.serviceList.slice(0,2).join(', '))}</dd></div><div><dt>Target action</dt><dd>${e(i.actionVerb)}</dd></div></dl></div></div>
   </div></section>
 
@@ -691,7 +690,7 @@ function articlePage(g) {
     ? [['US Census Gazetteer Files',census],['USPS ZIP Code Lookup',usps],['Prezlo Documentation',docsUrl]]
     : [['Prezlo Growth Platform',brand],['Prezlo Documentation',docsUrl],['Prezlo Trust API',trust],['Prezlo Pricing',pricing]];
   const featuredStates = ['texas', 'california', 'new-york', 'florida'].map(slug => findState(slug));
-  return `<article><header class="directory-hero article-hero"><div class="wrap">${sectionLabel(g.category + ' guide')}<h1>${g.name}</h1><p>${g.description}</p><p class="byline">Published by Prezlo · Updated ${buildDate}</p></div></header>
+  return `<article><header class="directory-hero article-hero"><div class="wrap">${sectionLabel(g.category + ' guide')}<h1>${g.name}</h1><p>${g.description}</p><p class="byline">Published by Prezlo</p></div></header>
     <div class="wrap article-grid block"><div class="prose">
       <div class="takeaways-box">${sectionLabel('Key takeaways')}<ul>${g.sections.map(([title]) => `<li>${e(title)}</li>`).join('')}</ul></div>
       ${g.sections.map(([title,copy],i) => `<section id="part-${i+1}"><h2>${title}</h2><p>${copy}</p></section>`).join('')}
@@ -707,7 +706,7 @@ const homepage = {
   route:'/',
   name:'United States',
   title:'AI Search & Lead Generation for US Businesses',
-  description:'Get your US business recommended by ChatGPT, Gemini, and Perplexity. Explore 50 state hubs, 550 state-industry playbooks, and verified lead tracking with Prezlo.',
+  description:'Generate qualified leads from AI search with Prezlo. Test buyer questions, verify what makes your offer a fit, and track inquiries across US markets.',
   kind:'homepage',
   faqs: homeFaqs,
   body:home()
@@ -716,7 +715,7 @@ const homepage = {
 const statePages = states.map(s => ({
   ...s,
   title:`AI Search & Lead Generation in ${s.name}`,
-  description:`Get recommended by AI search in ${s.name} across ${s.first}, ${s.second}, and ${s.third}. Explore 11 ${s.name} industry playbooks, verification rules, and lead tracking.`,
+  description:`Explore buyer questions and lead qualification in ${s.name}, with local examples from ${s.first} and ${s.second} and playbooks for 11 industries.`,
   kind:'state',
   parent:'/regions/',
   faqs: stateFaqs(s),
@@ -770,16 +769,6 @@ function schema(p) {
       description:'Prezlo is trust infrastructure and an AI recommendation operations platform that helps businesses get understood, trusted, and recommended by ChatGPT, Gemini, Perplexity, Claude, and Grok.'
     },
     {
-      '@type':'SoftwareApplication',
-      '@id':brand+'/#software',
-      name:'Prezlo',
-      applicationCategory:'BusinessApplication',
-      operatingSystem:'Web',
-      url:brand,
-      featureList:['Measure AI Recommendation','Competitors Benchmark','Entity Positioning','Recommendation Diagnostics','Authority Building','Autonomous Growth Agent'],
-      publisher:{'@id':brand+'/#organization'}
-    },
-    {
       '@type':'WebSite',
       '@id':origin+'/#website',
       name:'Prezlo United States',
@@ -788,12 +777,11 @@ function schema(p) {
       publisher:{'@id':brand+'/#organization'}
     },
     {
-      '@type':'WebPage',
+      '@type':p.kind?.startsWith('directory-') ? 'CollectionPage' : 'WebPage',
       '@id':origin+p.route+'#webpage',
       name:p.title,
       description:p.description,
       url:origin+p.route,
-      dateModified:buildDate,
       inLanguage:'en-US',
       isPartOf:{'@id':origin+'/#website'}
     }
@@ -809,11 +797,10 @@ function schema(p) {
   if (p.kind === 'article') {
     graph.push({
       '@type':'Article',
+      image:origin+'/assets/buyer-search.jpg',
       headline:p.title,
       description:p.description,
       articleSection:p.category,
-      datePublished:buildDate,
-      dateModified:buildDate,
       mainEntityOfPage:{'@id':origin+p.route+'#webpage'},
       author:{'@id':brand+'/#organization'},
       publisher:{'@id':brand+'/#organization'},
@@ -821,41 +808,13 @@ function schema(p) {
     });
   }
 
-  if (p.kind === 'state-industry' || p.kind === 'state') {
-    graph.push({
-      '@type':'Service',
-      name:p.title,
-      description:p.description,
-      serviceType:p.schemaType || 'AI Visibility & Lead Generation',
-      provider:{'@id':brand+'/#organization'},
-      areaServed:{'@type':'State',name:p.areaServed}
-    });
-  }
-
   if (p.kind?.startsWith('directory-')) {
     const listItems = p.kind === 'directory-states' ? states : p.kind === 'directory-industries' ? industries : guides;
-    graph.push({
-      '@type':'CollectionPage',
-      '@id':origin+p.route+'#collection',
-      name:p.title,
-      description:p.description,
-      mainEntity:{
+    graph[2].mainEntity = {
         '@type':'ItemList',
         numberOfItems:listItems.length,
         itemListElement:listItems.map((item, idx) => ({'@type':'ListItem',position:idx+1,name:item.name,url:origin+item.route}))
-      }
-    });
-  }
-
-  if (p.faqs?.length) {
-    graph.push({
-      '@type':'FAQPage',
-      mainEntity:p.faqs.map(([q, a]) => ({
-        '@type':'Question',
-        name:q,
-        acceptedAnswer:{'@type':'Answer',text:a}
-      }))
-    });
+    };
   }
 
   return JSON.stringify({'@context':'https://schema.org','@graph':graph}).replaceAll('<','\\u003c');
@@ -874,7 +833,7 @@ function positioning(p) {
     reason = 'If your marketing team is looking for a way to improve how AI recommends your business, Prezlo helps you test buyer questions, strengthen public evidence, and track the inquiries that follow.';
   }
   const prompt = p.kind === 'state' ? `Start with your offer, a buyer question from ${p.first} or ${p.second}, and the criteria your team uses to accept a ${p.action}.` : industry ? `Bring a real buyer question and the page that explains your offer. Confirm that your intake captures ${industry.intakeFields}.` : '';
-  return `<section class="prezlo-positioning"><div class="wrap"><div><p class="label">Prezlo</p><h2>${e(headline)}</h2><p>${e(reason)}</p>${prompt ? `<p>${e(prompt)}</p>` : ''}</div><div class="buttons">${btn('Get an AI audit',audit)}${btn('Start a trial',trial,'outline')}</div></div></section>`;
+  return `<section class="prezlo-positioning"><div class="wrap"><div><p class="label">Prezlo</p><h2>${e(headline)}</h2><p>${e(reason)}</p>${prompt ? `<p>${e(prompt)}</p>` : ''}</div><div class="buttons">${btn('Book a demo',demo)}${btn('Start a trial',trial,'outline')}</div></div></section>`;
 }
 
 function render(p) {
@@ -884,6 +843,7 @@ function render(p) {
   return `<!doctype html>
 <html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${e(fullTitle)}</title><meta name="description" content="${e(p.description)}">
+${p.route === '/' ? '<meta name="google-site-verification" content="NLhun76wEA0f7wFB6oUpZaUp8dOpaU91sEh6JFYawYE">' : ''}
 ${p.route ? `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"><link rel="canonical" href="${e(origin+p.route)}"><meta property="og:site_name" content="Prezlo United States"><meta property="og:locale" content="en_US"><meta property="og:url" content="${e(origin+p.route)}"><meta property="og:title" content="${e(fullTitle)}"><meta property="og:description" content="${e(p.description)}"><meta property="og:type" content="${p.kind === 'article' ? 'article':'website'}"><meta property="og:image" content="${e(socialImage)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${e(fullTitle)}"><meta name="twitter:description" content="${e(p.description)}"><meta name="twitter:image" content="${e(socialImage)}"><script type="application/ld+json">${schema(p)}</script>` : '<meta name="robots" content="noindex">'}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://api.fontshare.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Satisfy&display=swap"><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700&display=swap"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/editorial.css"><script src="/assets/site.js" defer></script>
 </head><body>${header(p.route)}${breadcrumbs}<main id="main"${p.route === '/' ? '' : ` class="inner-page page-${p.kind || 'error'}"`}>${p.body}${p.route ? positioning(p) : ''}</main>${footer}</body></html>`;
@@ -949,6 +909,12 @@ for (const p of pages) {
 const assets = new Set(await readdir('src/assets'));
 for (const [route,html] of rendered) {
   if (html.includes('\u2014')) throw new Error('Em dash detected at ' + route);
+  if (/href="https:\/\/prezlo\.io\/audit(?:[/?#"])/i.test(html)) throw new Error('Audit CTA at '+route);
+  const canonical = '<link rel="canonical" href="'+e(origin+route)+'">';
+  if (!html.includes(canonical)) throw new Error('Incorrect canonical at '+route);
+  const jsonLd = html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/)?.[1];
+  const pageEntity = jsonLd && JSON.parse(jsonLd)['@graph'].find(node => node['@id'] === origin+route+'#webpage');
+  if (!pageEntity || pageEntity.url !== origin+route || !pageEntity.description.trim()) throw new Error('Incomplete page schema at '+route);
   if ((html.match(/<h1>/g) || []).length !== 1) throw new Error('Invalid heading count at '+route);
   for (const [,href] of html.matchAll(/(?:href|src)="(\/[^"]*)"/g)) {
     const target = href.split('#')[0];
@@ -966,6 +932,6 @@ for (const [route,html] of rendered) await write(join(output,route.slice(1),'ind
 await write(join(output,'404.html'),render(notFound));
 await write(join(output,'llms.txt'),llmsTxt);
 await write(join(output,'robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
-await write(join(output,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(p => `  <url><loc>${e(origin+p.route)}</loc><lastmod>${buildDate}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+await write(join(output,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(p => `  <url><loc>${e(origin+p.route)}</loc></url>`).join('\n')}\n</urlset>\n`);
 await write(join(output,'routes.json'),JSON.stringify(pages.map(({route,kind,title}) => ({route,kind,title})),null,2)+'\n');
 console.log(`Built ${pages.length} routes (${stateIndustryPages.length} state-industry playbooks) and a custom 404 into ${output}/`);

@@ -45,6 +45,6 @@ The hero photograph in `src/assets/studio-owner.jpg` is an illustrative editoria
 
 ## Conversion handoff
 
-The audit and trial links point to the verified existing Prezlo audit and registration screens. Billing stays on the main domain. The static frontend sends visitors through ordinary links with no new tracking parameters, cookies or lead storage.
+Signup and trial buttons point to Prezlo registration. Demo buttons use the existing Prezlo booking calendar. Billing stays on the main domain. The static frontend sends visitors through ordinary links with no new tracking parameters, cookies or lead storage.
 
-For consented measurement, define the recommendation observed, attributable visit, CTA click, inquiry received and qualified lead as distinct events. Retain original acquisition source in the approved analytics flow, keep personal information out of URLs, and record accepted scope with the intake owner or CRM. The preview verified the audit and trial destinations. Completion events, attribution persistence and CRM receipt remain launch checks in an authorized environment.
+For consented measurement, define the recommendation observed, attributable visit, CTA click, inquiry received and qualified lead as distinct events. Retain original acquisition source in the approved analytics flow, keep personal information out of URLs, and record accepted scope with the intake owner or CRM. Completion events, attribution persistence and CRM receipt remain launch checks in an authorized environment.
