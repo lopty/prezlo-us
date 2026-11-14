@@ -89,6 +89,7 @@ document.querySelectorAll('[data-inline-filter]').forEach(wrapper => {
   const section = wrapper.closest('section') || document;
   const items = [...section.querySelectorAll('[data-filter-item]')];
   const groups = [...section.querySelectorAll('[data-filter-group]')];
+  const status = section.querySelector('[data-filter-count]');
   if (!input || !items.length) return;
   input.addEventListener('input', () => {
     const q = input.value.trim().toLowerCase();
@@ -99,6 +100,10 @@ document.querySelectorAll('[data-inline-filter]').forEach(wrapper => {
       const visible = group.querySelectorAll('[data-filter-item]:not([hidden])').length;
       group.hidden = visible === 0;
     });
+    if (status) {
+      const count = items.filter(item => !item.hidden).length;
+      status.textContent = q ? (count ? `${count} ${count === 1 ? 'state' : 'states'} found` : 'No states found') : '';
+    }
   });
 });
 

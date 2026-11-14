@@ -1475,6 +1475,7 @@ footer { background:#fff; border-top:1px solid #e4e5e7; padding-top:clamp(30px,5
   gap: 16px;
 }
 .archio-hero-card-img {
+  display: block;
   aspect-ratio: 0.72;
   border-radius: 16px;
   overflow: hidden;
@@ -2435,6 +2436,9 @@ footer { background:#fff; border-top:1px solid #e4e5e7; padding-top:clamp(30px,5
   .archio-state-strip,
   .archio-blog-grid,
   .archio-practices-grid { grid-template-columns: 1fr; }
+  .archio-hero-photos .archio-hero-card-img { aspect-ratio: 4 / 3; }
+  .archio-hero-photos .archio-hero-card-img img { object-position: center 36%; }
+  .archio-hero-photos .archio-hero-secondary-photo { display: none; }
   .archio-compare-frame { overflow-x: auto; }
   .archio-compare-row { min-width: 560px; }
   .archio-compare-cell { padding: 16px 14px; font-size: 13.5px; }

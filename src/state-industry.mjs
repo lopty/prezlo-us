@@ -16,7 +16,6 @@ const capIcons = [
   '<path d="M12 2v4m0 12v4M4.9 4.9l2.8 2.8m8.6 8.6 2.8 2.8M2 12h4m12 0h4M4.9 19.1l2.8-2.8m8.6-8.6 2.8-2.8"/>',
   '<path d="M4 8h14m-4-4 4 4-4 4m6 4H6m4-4-4 4 4 4"/>'
 ];
-const capTones = ['tone-blush', 'tone-periwinkle', 'tone-lavender', 'tone-sage', 'tone-peach', 'tone-sky'];
 
 function iconSvg(path) {
   return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${path}</svg>`;
@@ -127,7 +126,7 @@ function buildFaqs(state, industry) {
   ];
 }
 
-export function buildStateIndustryPage(state, industry, allStates, allIndustries, findGuide) {
+export function buildStateIndustryPage(state, industry, allStates, allIndustries, findGuide, faqSection) {
   const isTxFinance = state.code === 'TX' && industry.slug === 'financial-services';
   const lower = industry.name.toLowerCase();
   const route = `/regions/${state.slug}/${industry.slug}/`;
@@ -204,21 +203,20 @@ export function buildStateIndustryPage(state, industry, allStates, allIndustries
       <h2>Why AI misses ${lower} in ${state.name}</h2>
       <p>${industry.aiFailureMode}</p>
     </header>
-    <ol class="steps evidence-grid industry-checks visual-steps">
-      <li class="editorial-card tone-blush"><strong>Metro and ${state.jurisdictionUnit} overlap</strong><p>When a site lists ${state.name} generically, assistants cannot tell whether your ${state.first} team also dispatches or staffs ${state.second} and ${state.third}.</p></li>
-      <li class="editorial-card tone-lavender"><strong>Unverified ${industry.credentialSignals.split(',')[0]}</strong><p>Generative engines cross-check claims against ${industry.credentialSignals}. Missing or conflicting entity details send high-intent buyers to aggregators.</p></li>
-      <li class="editorial-card tone-periwinkle"><strong>Friction at ${industry.actionVerb} intake</strong><p>Sending visitors to a generic contact page loses qualified leads. Collecting ${industry.intakeFields} upfront filters out-of-area requests.</p></li>
+    <ol class="editorial-process detail-diagnostics">
+      <li><h3>Service coverage</h3><p>Explain whether the ${state.first} team serves ${state.second} and ${state.third}, and what buyers should confirm before contacting you.</p></li>
+      <li><h3>Evidence buyers can check</h3><p>Show which sources support your claims about ${industry.credentialSignals}. Review conflicting details before changing public pages.</p></li>
+      <li><h3>Inquiry fit</h3><p>Agree on the information your team needs for a ${industry.actionVerb}. Start with ${industry.intakeFields}.</p></li>
     </ol>
   </div></section>
 
   <section class="block"><div class="wrap">
     <header class="section-head">
-      ${sectionLabel('Prezlo execution stack')}
-      <h2>How Prezlo gets ${state.name} ${lower} recommended</h2>
-      <p>Prezlo pairs AI recommendation measurement with verified entity positioning, recommendation diagnostics, and reviewable website execution.</p>
+      <h2>How Prezlo helps ${lower} in ${state.name}</h2>
+      <p>Start with buyer questions, verify the public evidence, and review changes that could help qualified prospects find you.</p>
     </header>
-    <div class="capability-grid">
-      ${capabilities.map(([name, href, copy], idx) => `<article class="capability-card editorial-card ${capTones[idx]}"><div class="cap-head"><span class="medallion">${iconSvg(capIcons[idx])}</span><span class="cap-index">0${idx + 1}</span></div><h3><a href="${href}">${name} ${arrow}</a></h3><p>${copy}</p></article>`).join('')}
+    <div class="editorial-index">
+      ${capabilities.map(([name, href, copy]) => `<a class="editorial-index-row" href="${href}"><strong>${name}</strong><span>${copy}</span>${arrow}</a>`).join('')}
     </div>
   </div></section>
 
@@ -262,11 +260,6 @@ export function buildStateIndustryPage(state, industry, allStates, allIndustries
     <a class="guide-card guide-tone-${e(guide.category.toLowerCase().replaceAll(' ', '-'))}" href="${guide.route}">${sectionLabel(guide.category + ' playbook')}<h3>${guide.name}</h3><p>${guide.description}</p><span class="card-arrow">${arrow}</span></a>
   </div></section>
 
-  <section class="block landing-faq"><div class="wrap lead-faq faq">
-    <h2>Frequently asked questions about ${lower} AI search in ${state.name}</h2>
-    ${faqs.map(([q, a]) => `<details><summary>${e(q)}</summary><p>${e(a)}</p></details>`).join('')}
-  </div></section>
-
   <section class="block"><div class="wrap">
     <header class="section-head section-row">
       <div>${sectionLabel('Internal coverage mesh')}<h2>Explore more in ${state.name} and ${lower}</h2><p>Compare sibling industry playbooks in ${state.name} or neighboring ${state.area} states.</p></div>
@@ -284,15 +277,13 @@ export function buildStateIndustryPage(state, industry, allStates, allIndustries
     </div>
   </div></section>
 
-  <section class="block compact"><div class="wrap cta lead-next">
-    <div>${sectionLabel('Start your pilot')}<h2>Audit ${lower} visibility in ${state.name}</h2><p>Bring your public service page, ${industry.credentialSignals.split(',')[0]}, and three real buyer questions from ${state.first} or ${state.second}.</p></div>
-    <div class="buttons">${btn('Get an AI audit', audit)}${btn('Explore docs', 'https://prezlo.io/docs', 'light-outline')}</div>
-  </div></section>`;
+  ${faqSection(faqs, `Frequently asked questions about ${lower} AI search in ${state.name}`)}`;
 
   return {
     route,
     parent: state.route,
     kind: 'state-industry',
+    industry,
     name: `${industry.name} in ${state.name}`,
     title,
     description,

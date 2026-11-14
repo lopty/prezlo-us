@@ -1,0 +1,169 @@
+
+/* US editorial pages share the homepage's typography, sand and copper. */
+.inner-page {
+  --width: 1320px;
+  --ink: #25241f;
+  --text: #514c44;
+  --line: #dcd7cc;
+  --editorial-sand: #ecebe4;
+  --editorial-cream: #f6f4ed;
+}
+.inner-page :is(h1,h2) { font-family: var(--archio-serif); font-weight: 400; }
+.inner-page h1 { font-size: clamp(44px, 5.4vw, 86px); line-height: .98; }
+.inner-page h2 { font-size: clamp(32px, 3.5vw, 56px); line-height: 1.04; }
+.inner-page .label { color: #8c381f; }
+.inner-page > .block + .block { border-top: 1px solid var(--line); }
+.inner-page :is(.soft-blush-band,.soft-lavender-band,.local-checks,.qualification-band,.lead-approach) {
+  background: var(--editorial-cream);
+}
+.inner-page .directory-hero { background: var(--editorial-sand); }
+.inner-page .detail-hero > .wrap { padding: clamp(22px,4vw,64px); background: var(--editorial-sand); }
+.inner-page .detail-intro {
+  text-align: left;
+  max-width: 900px;
+  margin: 0 0 clamp(28px,4vw,54px);
+}
+.inner-page .detail-intro p:not(.label) { margin-inline: 0; }
+.inner-page .detail-intro .center-buttons { justify-content: flex-start; }
+.inner-page .page-hero-note { max-width: 64ch; }
+.page-state .detail-pair { grid-template-columns: 1.18fr .82fr; }
+.page-industry .detail-pair { grid-template-columns: .9fr 1.1fr; }
+.page-state-industry .detail-pair { grid-template-columns: .85fr 1.15fr; }
+.inner-page .detail-pair :is(.market-panel,.question-card,.editorial-photo) { border-radius: 4px; }
+.inner-page .market-panel { color: var(--ink); background: #fff; border: 0; box-shadow: none; }
+.inner-page .market-panel :is(h2,p,dt,dd) { color: inherit; }
+.inner-page .market-panel .brief-meta > div { border-color: var(--line); }
+.inner-page .detail-pair .question-card { background: #282923; }
+.page-industry .detail-pair .question-card { background: #39382d; }
+.page-state-industry .detail-pair .question-card { background: #2c352d; }
+.inner-page .question-card blockquote { font-family: var(--archio-serif); font-weight: 400; }
+.inner-page .detail-pair .question-card :is(.label,dt) { color: #ffccb7; }
+
+.editorial-feature-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: clamp(14px,2vw,30px); }
+.editorial-feature-grid > a { display: block; color: inherit; text-decoration: none; background: var(--editorial-cream); }
+.editorial-feature-grid img { display: block; width: 100%; aspect-ratio: 1.55; object-fit: cover; }
+.editorial-feature-grid > a > div { padding: clamp(15px,2vw,25px); }
+.editorial-feature-grid h2 { font-size: clamp(29px,3vw,43px); margin-bottom: 6px; }
+.editorial-feature-grid p { margin-bottom: 10px; }
+.editorial-feature-grid span { display: flex; align-items: center; gap: 7px; color: #8c381f; font-weight: 650; }
+.editorial-feature-grid a:hover h2 { text-decoration: underline; text-underline-offset: 4px; }
+.editorial-feature-grid + .editorial-index { margin-top: clamp(42px,6vw,84px); }
+.editorial-index-row {
+  display: grid;
+  grid-template-columns: minmax(150px,.65fr) minmax(0,1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 5px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+}
+.editorial-index-row:first-child, .editorial-index h2 + .editorial-index-row { border-top: 1px solid var(--line); }
+.editorial-index-row strong { font-weight: 650; }
+.editorial-index-row span { color: var(--text); }
+.editorial-index-row .arrow { color: #8c381f; }
+.editorial-index-row:hover, .editorial-index-row:focus-visible { background: #f4eee4; }
+
+.inner-page .region-groups { grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(12px,2vw,28px); }
+.inner-page .region-group h3 {
+  font: 400 clamp(24px,2.5vw,34px)/1.1 var(--archio-serif);
+  color: var(--ink);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 14px;
+}
+.inner-page .state-combo-list { grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line); }
+.inner-page .state-combo-list .state-link {
+  grid-template-columns: 2.2rem minmax(0,1fr) auto;
+  align-items: center;
+  padding: 9px 2px;
+  min-height: 56px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.inner-page .state-combo-list .state-code { background: none; color: #843a23; padding-inline: 0; }
+.inner-page .state-combo-list .state-link:hover { transform: none; background: var(--editorial-cream); }
+.inner-page .state-combo-list .state-link small { color: var(--text); }
+.state-filter-result { color: var(--text); font-size: .85rem; margin: 4px 0 0; }
+.state-filter-result:empty { display: none; }
+
+.editorial-process { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(14px,3vw,32px); }
+.editorial-process > * { border-top: 2px solid #b45b3b; padding-top: 16px; }
+.detail-diagnostics { padding: 0; list-style: none; }
+.inner-page .blueprint-card { border: 0; border-top: 2px solid #b45b3b; border-radius: 0; box-shadow: none; background: #fff; }
+.inner-page .mesh-item { background: transparent; border: 0; border-radius: 0; border-bottom: 1px solid var(--line); box-shadow: none; }
+.inner-page .mesh-item:hover { transform: none; background: var(--editorial-cream); }
+.inner-page .atlas-index .atlas-region a { background: transparent; border-radius: 0; box-shadow: none; }
+.inner-page .inline-search input { width: min(26vw,320px); min-width: min(245px,100%); border-radius: 5px; }
+
+/* FAQ treatment matches the main Prezlo solutions pages. */
+.landing-faq { background: #fff; }
+.lead-faq h2 { text-align: center; margin-bottom: 30px; }
+.prezlo-faq-list { border-top: 2px solid #9d8170; }
+.prezlo-faq-list details { border-bottom: 2px solid #b9aaa0; }
+.prezlo-faq-list summary {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 20px; list-style: none; cursor: pointer;
+  font-size: clamp(16px,1.5vw,19px); font-weight: 600; line-height: 1.45;
+}
+.prezlo-faq-list summary::-webkit-details-marker { display: none; }
+.prezlo-faq-list summary::after {
+  content: ""; width: 10px; height: 10px; flex: 0 0 10px; margin-right: 4px;
+  border-right: 2px solid; border-bottom: 2px solid; transform: rotate(45deg);
+}
+.prezlo-faq-list details[open] summary::after { transform: rotate(225deg); }
+.prezlo-faq-list summary:hover, .prezlo-faq-list details[open] summary { background: #fff0e8; }
+.prezlo-faq-list summary:focus-visible { outline: 2px solid #ad3b20; outline-offset: -3px; }
+.prezlo-faq-answer { padding: 16px 20px 22px; }
+.prezlo-faq-answer p { margin: 0; max-width: 75ch; line-height: 1.7; }
+
+.prezlo-checklist { padding: 0; margin: 0 auto; max-width: 1060px; list-style: none; border-top: 1px solid var(--archio-line); }
+.prezlo-checklist li {
+  display: grid; grid-template-columns: 30px minmax(0,.75fr) minmax(0,1fr); align-items: start;
+  gap: 14px; padding: 16px 8px; border-bottom: 1px solid var(--archio-line);
+}
+.prezlo-checklist strong { font-weight: 650; }
+.prezlo-checklist p { margin: 0; color: var(--archio-text); }
+.prezlo-positioning {
+  background: #312a23; color: #fff; padding-block: clamp(35px,6vw,80px);
+}
+.prezlo-positioning > .wrap {
+  display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center;
+  gap: 22px 40px; max-width: 1320px;
+}
+.prezlo-positioning .label { color: #f4b79c; margin-bottom: 8px; }
+.prezlo-positioning h2 {
+  color: #fff; font: 400 clamp(31px,4vw,60px)/1.06 var(--archio-serif); margin-bottom: 12px;
+  text-wrap: balance;
+}
+.prezlo-positioning p { color: #f0e8df; max-width: 63ch; }
+.prezlo-positioning p + p { margin-top: 8px; }
+.prezlo-positioning .button { background: #f7e8db; color: #3e2a20; border-color: #f7e8db; }
+.prezlo-positioning .button.outline { color: #fff; background: transparent; }
+.prezlo-positioning .button:hover { background: #fff; color: #352820; }
+
+@media (max-width: 1050px) {
+  .inner-page .region-groups { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 720px) {
+  .inner-page h1 { font-size: clamp(38px,9vw,56px); }
+  .page-state .detail-pair, .page-industry .detail-pair, .page-state-industry .detail-pair,
+  .editorial-process, .prezlo-positioning > .wrap, .editorial-feature-grid { grid-template-columns: 1fr; }
+  .inner-page .inline-search { width: 100%; }
+  .inner-page .inline-search input { width: 100%; }
+  .prezlo-faq-list summary { padding: 16px 10px; }
+  .prezlo-faq-answer { padding: 13px 10px 17px; }
+  .prezlo-checklist li { grid-template-columns: 28px minmax(0,1fr); gap: 4px 10px; }
+  .prezlo-checklist p { grid-column: 2; }
+  .editorial-index-row { grid-template-columns: minmax(0,1fr) auto; gap: 2px 8px; }
+  .editorial-index-row span { grid-column: 1; grid-row: 2; }
+  .editorial-index-row .arrow { grid-column: 2; grid-row: 1 / span 2; }
+}
+@media (max-width: 460px) {
+  .inner-page .region-groups { grid-template-columns: 1fr; }
+  .inner-page .detail-hero > .wrap { padding: 18px; }
+}
+

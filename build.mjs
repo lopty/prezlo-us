@@ -35,7 +35,6 @@ const findIndustry = slug => industries.find(industry => industry.slug === slug)
 const homeIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>';
 const starSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
 const checkSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
-const crossSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
 
 function header(route) {
   return `<a class="skip" href="#main">Skip to content</a><header class="archio-topbar"><div class="archio-topbar-inner">
@@ -77,10 +76,6 @@ const footer = `<footer class="archio-footer"><div class="archio-footer-inner">
   <div class="archio-footer-wordmark" aria-hidden="true">Prezlo</div>
 </div></footer>`;
 
-function cta(heading = 'See how AI describes your business.') {
-  return `<section class="block compact"><div class="wrap cta"><div><h2>${heading}</h2><p>Start with a real offer, a target market and the questions your buyers ask across ChatGPT, Gemini, and Perplexity.</p></div><div class="buttons">${btn('Get an AI audit',audit)}${btn('Start a trial',trial,'outline')}</div></div></section>`;
-}
-
 const scenarios = [
   ['Service business', 'Who repairs rooftop AC in Austin?', '/regions/texas/service-businesses/','Commercial HVAC service page','Confirm which rooftop units and Austin ZIPs the crew services.'],
   ['Local business', 'Which location near Worcester runs an evening hybrid program?', '/regions/massachusetts/education/','Campus program listing','Put evening cohort dates and campus intake on the Worcester page.'],
@@ -104,24 +99,6 @@ function guideLink(guide) {
   return `<a class="guide-card guide-tone-${e(tone)}" href="${guide.route}" data-guide-category="${e(guide.category)}">${sectionLabel(guide.category)}<h3>${guide.name}</h3><p>${guide.description}</p><span class="card-arrow">${arrow}</span></a>`;
 }
 
-const industryIcons = {
-  'service-businesses':'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9l-3.8 3.8Z"/>',
-  'local-businesses':'<path d="M3 10h18M5 10v9h14v-9M4 10l1.5-5h13L20 10"/><path d="M10 19v-5h4v5"/>',
-  'legal':'<path d="M12 3v17m-7-4h14M6 7l6-3 6 3M4 13l2-6 2 6a2 2 0 0 1-4 0Zm12 0 2-6 2 6a2 2 0 0 1-4 0Z"/>',
-  'accounting':'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2m4 0h2M8 15h2m4 0h2"/>',
-  'financial-services':'<path d="M3 20h18M6 16v-4m6 4V8m6 8V5"/><path d="m5 10 7-5 7 3"/>',
-  'real-estate':'<path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-9Z"/>',
-  'healthcare':'<path d="M12 5v14M5 12h14"/><rect x="3" y="3" width="18" height="18" rx="4"/>',
-  'education':'<path d="m2 9 10-4 10 4-10 4-10-4Z"/><path d="M6 11.5v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/>',
-  'travel':'<circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18Z"/>',
-  'logistics':'<path d="M1 4h13v11H1zM14 8h4l4 4v3h-8z"/><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>',
-  'marketing-agencies':'<path d="m3 11 12-5v12L3 13v-2Z"/><path d="M15 9.5a3.5 3.5 0 0 1 0 5"/><path d="M6 14v4a1 1 0 0 0 1 1h2"/>'
-};
-
-function industryIcon(slug) {
-  const d = industryIcons[slug] || industryIcons['service-businesses'];
-  return `<span class="medallion"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg></span>`;
-}
 
 const workflow = [
   {id:'audit',name:'Measure AI Recommendation',title:'See who appears in AI answers',copy:'Track buyer prompts across ChatGPT, Gemini, Perplexity, and Claude, and inspect every cited URL.',link:'Explore Measure AI Recommendation',path:brand+'/features/track-and-measure'},
@@ -197,12 +174,11 @@ function home() {
   ];
 
   const compareRows = [
-    ['Track real buyer prompts across 7 AI engines', false, true],
-    ['Benchmark local state & metro competitors automatically', false, true],
-    ['Verified Schema.org JSON-LD & Trust API endpoints', false, true],
-    ['Dedicated 50-state x 11-industry local coverage proof', false, true],
-    ['Reviewable CMS updates shipped through Devy', false, true],
-    ['Pipeline attribution from AI mention to qualified lead', false, true]
+    ['Find questions that are likely to lead to an inquiry', 'Compare questions by service, market, and buying stage.'],
+    ['See how AI recommends your business', 'Save answers and review named competitors and sources when available.'],
+    ['Build public evidence people can verify', 'Review claims against approved facts with Prezlo Trust. Connect the evidence to the right page or profile.'],
+    ['Fix gaps in what AI can find about you', 'Use the audit to prioritize changes. Review proposed website updates before publishing.'],
+    ['Track visits and qualify inquiries', 'Follow identifiable AI referrals and contact actions. Use the inquiry workflow to record which leads your team accepts.']
   ];
 
   const featuredCombos = [
@@ -247,7 +223,10 @@ function home() {
           <div class="archio-hero-right">
             <div class="archio-hero-photos">
               <div class="archio-hero-card-img"><img src="/assets/hero-strategy.jpg" width="800" height="1200" alt="US business leaders reviewing AI search growth metrics" fetchpriority="high"></div>
-              <div class="archio-hero-card-img"><img src="/assets/hero-workspace.jpg" width="800" height="1200" alt="Prezlo analytics workspace in minimalist architectural studio" fetchpriority="high"></div>
+              <picture class="archio-hero-card-img archio-hero-secondary-photo">
+                <source media="(width > 670px)" srcset="/assets/hero-workspace.jpg">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="800" height="1200" alt="Prezlo analytics workspace in minimalist architectural studio">
+              </picture>
             </div>
           </div>
         </div>
@@ -371,22 +350,12 @@ function home() {
     <section class="archio-section archio-section-white">
       <div class="archio-wrap">
         <header class="archio-section-head" data-reveal>
-          <p class="archio-eyebrow">Platform Comparison</p>
-          <h2>Why dedicated AI visibility infrastructure beats manual checking</h2>
-          <p>Manually typing a single prompt once gives an incomplete snapshot. Prezlo operationalizes measurement, schema integrity, and continuous fixes.</p>
+          <h2>What you can do with Prezlo</h2>
+          <p>Get recommended for the right work and give interested buyers a clear way to contact you.</p>
         </header>
-        <div class="archio-compare-frame" data-reveal>
-          <div class="archio-compare-row archio-compare-head">
-            <div class="archio-compare-cell">Capability</div>
-            <div class="archio-compare-cell">Manual Prompt Checks</div>
-            <div class="archio-compare-cell">Prezlo Platform</div>
-          </div>
-          ${compareRows.map(([label, manual, prezlo]) => `<div class="archio-compare-row">
-            <div class="archio-compare-cell">${label}</div>
-            <div class="archio-compare-cell"><span class="${manual ? 'archio-badge-yes' : 'archio-badge-no'}" aria-label="${manual ? 'Included' : 'Not included'}">${manual ? checkSvg : crossSvg}</span></div>
-            <div class="archio-compare-cell"><span class="${prezlo ? 'archio-badge-yes' : 'archio-badge-no'}" aria-label="Included in Prezlo">${checkSvg}</span></div>
-          </div>`).join('')}
-        </div>
+        <ul class="prezlo-checklist" data-reveal>
+          ${compareRows.map(([label, description]) => `<li><span class="archio-badge-yes" aria-hidden="true">${checkSvg}</span><strong>${label}</strong><p>${description}</p></li>`).join('')}
+        </ul>
       </div>
     </section>
 
@@ -469,8 +438,8 @@ function home() {
               <span>Prezlo United States · AI Recommendation Operations</span>
             </div>
           </aside>
-          <div class="archio-faq-list" data-reveal>
-            ${homeFaqs.map(([q, a], idx) => `<details class="archio-faq-item"${idx === 0 ? ' open' : ''}><summary><span>${e(q)}</span><span class="archio-faq-plus" aria-hidden="true">+</span></summary><p>${e(a)}</p></details>`).join('')}
+          <div class="prezlo-faq-list" data-reveal>
+            ${faqItems(homeFaqs)}
           </div>
         </div>
       </div>
@@ -515,7 +484,7 @@ function home() {
 }
 
 function industryLink(i) {
-  return `<a class="tile editorial-card tone-${i.tone}" href="${i.route}"><div class="industry-tile-head">${industryPhotos[i.slug] ? editorialPhoto(industryPhotos[i.slug]) : `<div class="tile-icon-row">${industryIcon(i.slug)}<span class="label">${e(i.displayTag)}</span></div>`}<h3>${i.name}</h3><p>${i.description}</p></div><div class="industry-preview"><span class="mono">Buyer question</span><p>“${i.question}”</p></div><span class="tile-action">Explore ${i.name.toLowerCase()} across 50 states ${arrow}</span></a>`;
+  return `<a class="editorial-index-row" href="${i.route}"><strong>${e(i.name)}</strong><span>${e(i.description)}</span>${arrow}</a>`;
 }
 
 const directories = {
@@ -547,7 +516,9 @@ function directory(route) {
   if (page.kind === 'states') return stateDirectory(page);
   let content;
   if (page.kind === 'industries') {
-    content = `<div class="tile-grid">${industries.map(industryLink).join('')}</div>`;
+    const featured = industries.filter(i => industryPhotos[i.slug]);
+    content = `<div class="editorial-feature-grid">${featured.map(i => `<a href="${i.route}">${editorialPhoto(industryPhotos[i.slug])}<div><h2>${e(i.name)}</h2><p>${e(i.question)}</p><span>Explore the playbook ${arrow}</span></div></a>`).join('')}</div>
+      <section class="editorial-index" aria-labelledby="all-industries"><h2 id="all-industries">Explore every industry</h2>${industries.map(industryLink).join('')}</section>`;
   } else {
     const categories = ['All', ...new Set(guides.map(g => g.category))];
     content = `<div class="filter-bar" data-guide-filter>
@@ -556,7 +527,7 @@ function directory(route) {
     </div>
     <div class="guide-grid" data-guide-list>${guides.map(guideLink).join('')}</div>`;
   }
-  return `${directoryHero(page)}<section class="block"><div class="wrap">${content}</div></section>${cta()}`;
+  return `${directoryHero(page)}<section class="block"><div class="wrap">${content}</div></section>`;
 }
 
 function stateDirectory(page) {
@@ -575,23 +546,23 @@ function stateDirectory(page) {
         <div class="atlas-results">${areas.map(area => `<section class="atlas-region" data-state-group><h3>${area}</h3><div>${states.filter(state => state.area === area).map(state => `<a href="${state.route}" data-state="${state.name.toLowerCase()}" data-state-code="${state.code}"><span>${state.name}</span><small>${state.code}</small>${arrow}</a>`).join('')}</div></section>`).join('')}</div>
       </div>
     </div>
-  </div></section>${cta()}`;
+  </div></section>`;
 }
 
 function faqSection(items, heading = 'Frequently asked questions') {
-  return `<section class="block landing-faq"><div class="wrap lead-faq faq"><h2>${heading}</h2>
-    ${items.map(([question,answer]) => `<details><summary>${e(question)}</summary><p>${e(answer)}</p></details>`).join('')}
+  return `<section class="block landing-faq"><div class="wrap lead-faq"><h2>${e(heading)}</h2>
+    <div class="prezlo-faq-list">${faqItems(items)}</div>
   </div></section>`;
+}
+
+function faqItems(items) {
+  return items.map(([question, answer], index) => `<details${index === 0 ? ' open' : ''}><summary>${e(question)}</summary><div class="prezlo-faq-answer"><p>${e(answer)}</p></div></details>`).join('');
 }
 
 function leadApproach(heading, steps) {
   return `<section class="block lead-approach"><div class="wrap"><header class="section-head"><h2>${heading}</h2></header>
-    <div class="evidence-grid steps">${steps.map(([title,copy]) => `<div><h3>${title}</h3><p>${copy}</p></div>`).join('')}</div>
+    <div class="editorial-process">${steps.map(([title,copy]) => `<div><h3>${title}</h3><p>${copy}</p></div>`).join('')}</div>
   </div></section>`;
-}
-
-function leadNext(heading,copy) {
-  return `<section class="block compact"><div class="wrap cta lead-next"><div>${sectionLabel('Next step')}<h2>${heading}</h2><p>${copy}</p></div><div class="buttons">${btn('Get an AI audit',audit)}${btn('Start a trial',trial,'light-outline')}</div></div></section>`;
 }
 
 function stateFaqs(s) {
@@ -639,12 +610,9 @@ function statePage(s) {
         <input type="search" id="state-ind-filter" placeholder="Search ${s.name} industries..." autocomplete="off">
       </div>
     </header>
-    <div class="combo-grid" data-filter-grid>
-      ${industries.map(ind => `<a class="combo-card editorial-card tone-${ind.tone}" href="/regions/${s.slug}/${ind.slug}/" data-filter-item="${e((ind.name + ' ' + ind.displayTag + ' ' + ind.serviceList.join(' ')).toLowerCase())}">
-        <div class="combo-top">${industryIcon(ind.slug)}<span class="label">${e(ind.displayTag)}</span></div>
-        <strong>${ind.name} in ${s.name}</strong>
-        <span>${e(ind.serviceList[0])} and ${e(ind.serviceList[1])} across ${s.first} and ${s.second}</span>
-        <span class="tile-action">Open ${s.name} playbook ${arrow}</span>
+    <div class="editorial-index state-industry-index" data-filter-grid>
+      ${industries.map(ind => `<a class="editorial-index-row" href="/regions/${s.slug}/${ind.slug}/" data-filter-item="${e((ind.name + ' ' + ind.displayTag + ' ' + ind.serviceList.join(' ')).toLowerCase())}">
+        <strong>${e(ind.name)}</strong><span>${e(ind.description)}</span>${arrow}
       </a>`).join('')}
     </div>
   </div></section>
@@ -659,8 +627,7 @@ function statePage(s) {
 
   <section class="block"><div class="wrap"><header class="section-head section-row"><div><h2>Keep exploring</h2><p>More state hubs from the ${s.area} region.</p></div>${btn('All 50 states','/regions/','outline')}</header><div class="state-list">${nearby.map(stateLink).join('')}</div><div class="detail-links"><a href="${primaryIndustry.route}">${primaryIndustry.name} hub ${arrow}</a><a href="/guides/track-ai-referral-leads/">Lead measurement ${arrow}</a><a href="/guides/get-recommended-by-chatgpt-and-gemini/">Get recommended by ChatGPT and Gemini ${arrow}</a></div></div></section>
 
-  ${faqSection(faqs, `Frequently asked questions about AI search in ${s.name}`)}
-  ${leadNext(`Start with one ${s.name} market`,`Bring the page that describes your offer, one buyer question from ${s.first} or ${s.second}, and the team criteria for accepting a ${s.action}.`)}`;
+  ${faqSection(faqs, `Frequently asked questions about AI search in ${s.name}`)}`;
 }
 
 function industryFaqs(i) {
@@ -697,10 +664,11 @@ function industryPage(i) {
 
   <section class="block" id="industry-states"><div class="wrap">
     <header class="section-head section-row">
-      <div>${sectionLabel('50-state playbooks')}<h2>${i.name} AI search by US state</h2><p>Every state carries unique metro prompt examples, local jurisdiction rules, and intake flows tailored for ${i.name.toLowerCase()}.</p></div>
+      <div>${sectionLabel('US state playbooks')}<h2>Explore ${i.name.toLowerCase()} by state</h2><p>Find local buyer questions, evidence to verify, and intake examples for your market.</p></div>
       <div class="inline-search" data-inline-filter>
         <label class="sr-only" for="ind-state-filter">Filter states for ${i.name}</label>
         <input type="search" id="ind-state-filter" placeholder="Search state or metro..." autocomplete="off">
+        <p class="state-filter-result" role="status" data-filter-count></p>
       </div>
     </header>
     <div class="region-groups">
@@ -714,8 +682,7 @@ function industryPage(i) {
   </div></section>
 
   <section class="block qualification-band"><div class="wrap split"><div><h2>What counts as a qualified inquiry?</h2><p>${i.qualification}</p><p>Capture <strong>${i.intakeFields}</strong> upfront, and record CTA click, received inquiry, and accepted ${i.actionVerb} separately.</p><a class="under" href="/guides/track-ai-referral-leads/">Read the measurement guide ${arrow}</a></div>${guideLink(guide)}</div></section>
-  ${faqSection(faqs, `Frequently asked questions for ${i.name.toLowerCase()}`)}
-  ${leadNext('Start your AI visibility audit',plan.next)}`;
+  ${faqSection(faqs, `Frequently asked questions for ${i.name.toLowerCase()}`)}`;
 }
 
 function articlePage(g) {
@@ -733,7 +700,7 @@ function articlePage(g) {
       <section class="source-links"><h2>Apply this playbook by state</h2><div class="detail-links">${featuredStates.map(s => `<a href="${s.route}">${s.name} ${arrow}</a>`).join('')}<a href="/industries/">All 11 industries ${arrow}</a></div></section>
     </div>
     <aside aria-label="Article navigation"><div><h2>In this guide</h2>${g.sections.map(([title],i) => `<a href="#part-${i+1}">${title}</a>`).join('')}<a href="#practice">${g.action}</a></div>${guideLink(related)}</aside></div>
-  </article>${cta()}`;
+  </article>`;
 }
 
 const homepage = {
@@ -768,7 +735,7 @@ const industryPages = industries.map(i => ({
 }));
 
 const stateIndustryPages = states.flatMap(s =>
-  industries.map(i => buildStateIndustryPage(s, i, states, industries, findGuide))
+  industries.map(i => buildStateIndustryPage(s, i, states, industries, findGuide, faqSection))
 );
 
 const pages = [
@@ -894,6 +861,22 @@ function schema(p) {
   return JSON.stringify({'@context':'https://schema.org','@graph':graph}).replaceAll('<','\\u003c');
 }
 
+function positioning(p) {
+  const industry = p.kind === 'state-industry' ? p.industry : p.kind === 'industry' ? p : null;
+  const audience = industry?.name.toLowerCase();
+  const market = p.areaServed && typeof p.areaServed === 'string' ? p.areaServed : 'the United States';
+  let headline = `AI search lead generation for ${audience || 'businesses'}${industry && p.kind === 'industry' ? '' : ' in ' + market}`;
+  let reason = industry
+    ? `If your team wants to turn questions about ${industry.serviceList[0]} into an inquiry it can qualify, Prezlo helps you test the answers, verify the evidence, and track contacts you can attribute to AI.`
+    : `If you run a business in ${market} and want leads for the work you actually do, Prezlo helps you identify buyer questions, check your recommendations, and track qualified inquiries.`;
+  if (p.kind === 'article') {
+    headline = 'Put this guide to work with Prezlo';
+    reason = 'If your marketing team is looking for a way to improve how AI recommends your business, Prezlo helps you test buyer questions, strengthen public evidence, and track the inquiries that follow.';
+  }
+  const prompt = p.kind === 'state' ? `Start with your offer, a buyer question from ${p.first} or ${p.second}, and the criteria your team uses to accept a ${p.action}.` : industry ? `Bring a real buyer question and the page that explains your offer. Confirm that your intake captures ${industry.intakeFields}.` : '';
+  return `<section class="prezlo-positioning"><div class="wrap"><div><p class="label">Prezlo</p><h2>${e(headline)}</h2><p>${e(reason)}</p>${prompt ? `<p>${e(prompt)}</p>` : ''}</div><div class="buttons">${btn('Get an AI audit',audit)}${btn('Start a trial',trial,'outline')}</div></div></section>`;
+}
+
 function render(p) {
   const fullTitle = p.title + ' | Prezlo USA';
   const socialImage = origin + '/assets/buyer-search.jpg';
@@ -902,8 +885,8 @@ function render(p) {
 <html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${e(fullTitle)}</title><meta name="description" content="${e(p.description)}">
 ${p.route ? `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"><link rel="canonical" href="${e(origin+p.route)}"><meta property="og:site_name" content="Prezlo United States"><meta property="og:locale" content="en_US"><meta property="og:url" content="${e(origin+p.route)}"><meta property="og:title" content="${e(fullTitle)}"><meta property="og:description" content="${e(p.description)}"><meta property="og:type" content="${p.kind === 'article' ? 'article':'website'}"><meta property="og:image" content="${e(socialImage)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${e(fullTitle)}"><meta name="twitter:description" content="${e(p.description)}"><meta name="twitter:image" content="${e(socialImage)}"><script type="application/ld+json">${schema(p)}</script>` : '<meta name="robots" content="noindex">'}
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://api.fontshare.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Satisfy&display=swap"><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700&display=swap"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script>
-</head><body>${header(p.route)}${breadcrumbs}<main id="main"${p.route === '/' ? '' : ' class="inner-page"'}>${p.body}</main>${footer}</body></html>`;
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://api.fontshare.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&family=Satisfy&display=swap"><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700&display=swap"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"><link rel="stylesheet" href="/assets/editorial.css"><script src="/assets/site.js" defer></script>
+</head><body>${header(p.route)}${breadcrumbs}<main id="main"${p.route === '/' ? '' : ` class="inner-page page-${p.kind || 'error'}"`}>${p.body}${p.route ? positioning(p) : ''}</main>${footer}</body></html>`;
 }
 
 function buildLlmsTxt() {
